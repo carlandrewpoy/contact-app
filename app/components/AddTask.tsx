@@ -6,19 +6,19 @@ import { FormEventHandler, FormEvent, useState, useEffect, useRef } from 'react'
 import { addTodo } from '@/public/api'
 import { useRouter } from 'next/navigation'
 import { v4 as uuidv4 } from 'uuid';
-import { useAutoSelectInput } from '@/public/customHooks'
+import { useAutoSelectInput, useAutoSelectInputNumber } from '@/public/customHooks'
 
 const AddTask = () => {
   const [openModal, setOpenModal] = useState<boolean>(false)
   const [newTaskValue, setNewTaskValue] = useState<string>('')
   const router = useRouter()
   // const inputRef = useRef<HTMLInputElement>(null);
-  const inputRef = useAutoSelectInput(openModal);
+  const inputRef = useAutoSelectInputNumber(openModal);
 
   const [formData, setFormData] = useState({
     name: '',
     address: '',
-    mobile: '',
+    mobile: '09',
   });
 
   console.log(formData)
@@ -71,6 +71,22 @@ const AddTask = () => {
       <form onSubmit={handleSubmit}>
       <h3 className='font-bold text-lg mb-5'>Add New Task</h3>
       <div className='flex flex-col text-xl gap-4'>
+      <div className='flex flex-col gap-2'>
+          <label className='text-start' htmlFor='mobile'>
+            Mobile
+          </label>
+          <input
+            className='input input-bordered input-primary w-full'
+            type='tel'
+            id='mobile'
+            name='mobile'
+            value={formData.mobile}
+            onChange={handleInputChange}
+            required
+            ref={inputRef}
+            pattern="09[0-9]{9}"            maxLength={11}
+            />
+        </div>
         <div className='flex flex-col gap-2'>
           <label className='text-start' htmlFor='name'>
             Name
@@ -82,6 +98,7 @@ const AddTask = () => {
             name='name'
             value={formData.name}
             onChange={handleInputChange}
+            required
           />
         </div>
         <div className='flex flex-col gap-2'>
@@ -95,19 +112,7 @@ const AddTask = () => {
             name='address'
             value={formData.address}
             onChange={handleInputChange}
-          />
-        </div>
-        <div className='flex flex-col gap-2'>
-          <label className='text-start' htmlFor='mobile'>
-            Mobile
-          </label>
-          <input
-            className='input input-bordered input-primary w-full'
-            type='text'
-            id='mobile'
-            name='mobile'
-            value={formData.mobile}
-            onChange={handleInputChange}
+            required
           />
         </div>
         <button type='submit' className='btn'>

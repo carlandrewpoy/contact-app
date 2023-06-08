@@ -6,7 +6,7 @@ import {FiEdit, FiTrash} from 'react-icons/fi'
 import Modal from './Modal'
 import { deleteTodo, editTodo } from "@/public/api"
 import { useRouter } from "next/navigation"
-import { useAutoSelectInput, useAutoSelectButton } from "@/public/customHooks"
+import { useAutoSelectInput, useAutoSelectInputNumber } from "@/public/customHooks"
 
 interface TodoProps {
   todo: ITask
@@ -15,9 +15,8 @@ interface TodoProps {
 const Task: React.FC<TodoProps> = ({ todo }) => {
   const router = useRouter()
   const [openEditModal, setOpenEditModal] = useState(false)
-  const inputRef = useAutoSelectInput(openEditModal)
+  const inputRef = useAutoSelectInputNumber(openEditModal)
   const [openDeleteModal, setOpenDeleteModal] = useState(false)
-  const buttonRef = useAutoSelectButton(openDeleteModal)
 
   const [formData, setFormData] = useState({
     name: todo.name,
@@ -70,12 +69,27 @@ const Task: React.FC<TodoProps> = ({ todo }) => {
         <form onSubmit={handleSubmitTodo}>
           <h3 className='font-bold text-lg mb-5'>Add New Task</h3>
           <div className='flex flex-col text-xl gap-4'>
+          <div className='flex flex-col gap-2'>
+              <label className='text-start' htmlFor='mobile'>
+                Mobile
+              </label>
+              <input
+                className='input input-bordered input-primary w-full'
+                type='tel'
+                id='mobile'
+                name='mobile'
+                value={formData.mobile}
+                onChange={handleInputChange}
+                maxLength={11}
+                pattern="09[0-9]{9}"       
+                ref={inputRef}
+              />
+            </div>
             <div className='flex flex-col gap-2'>
               <label className='text-start' htmlFor='name'>
                 Name
               </label>
               <input
-              ref={inputRef}
                 className='input input-bordered input-primary w-full'
                 type='text'
                 id='name'
@@ -90,23 +104,10 @@ const Task: React.FC<TodoProps> = ({ todo }) => {
               </label>
               <input
                 className='input input-bordered input-primary w-full'
-                type='text'
+                type='address'
                 id='address'
                 name='address'
                 value={formData.address}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className='flex flex-col gap-2'>
-              <label className='text-start' htmlFor='mobile'>
-                Mobile
-              </label>
-              <input
-                className='input input-bordered input-primary w-full'
-                type='text'
-                id='mobile'
-                name='mobile'
-                value={formData.mobile}
                 onChange={handleInputChange}
               />
             </div>
@@ -123,7 +124,7 @@ const Task: React.FC<TodoProps> = ({ todo }) => {
             <h3 className='font-bold text-lg'>Are sure you want to delete this task.</h3>
             <div className='text-lg text-center'>
               <div className="flex justify-end">
-                <button ref={buttonRef} type='submit' className="btn btn-error mx-5">Yes</button> 
+                <button type='submit' className="btn btn-error mx-5">Yes</button> 
               </div>              
             </div>
           </form>

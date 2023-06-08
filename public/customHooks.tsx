@@ -7,6 +7,7 @@ export const useAutoSelectInput = (params: boolean): React.RefObject<HTMLInputEl
     if (inputRef.current) {
       inputRef.current.focus();
       const inputLength = inputRef.current.value.length;
+      inputRef.current.type = 'text';
       inputRef.current.setSelectionRange(inputLength, inputLength);
       // inputRef.current.select();
     }
@@ -15,30 +16,18 @@ export const useAutoSelectInput = (params: boolean): React.RefObject<HTMLInputEl
   return inputRef;
 }
 
-export const useAutoSelectButton = (params: boolean): React.RefObject<HTMLButtonElement> => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
+export const useAutoSelectInputNumber = (params: boolean): React.RefObject<HTMLInputElement> => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Enter' && buttonRef.current) {
-        buttonRef.current.focus();
-      }
-    };
-
-    if (buttonRef.current) {
-      buttonRef.current.addEventListener('keydown', handleKeyDown);
+    if (inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.setSelectionRange(
+        inputRef.current.value.length,
+        inputRef.current.value.length
+      );
     }
-
-    return () => {
-      if (buttonRef.current) {
-        buttonRef.current.removeEventListener('keydown', handleKeyDown);
-      }
-    };
   }, [params]);
 
-  return buttonRef;
+  return inputRef;
 };
-
-
-
-

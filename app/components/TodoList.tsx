@@ -14,9 +14,9 @@ const TodoList: React.FC<TodoListProps> = ({ todos  }) => {
           {/* head */}
           <thead>
             <tr>
-              <th className='text-xl font-bold'>Todo</th>
-              <th className='text-xl font-bold'>Address</th>
               <th className='text-xl font-bold'>Mobile</th>
+              <th className='text-xl font-bold'>Name</th>
+              <th className='text-xl font-bold'>Address</th>
               <th className='text-xl font-bold'>Actions</th>
             </tr>
           </thead>
