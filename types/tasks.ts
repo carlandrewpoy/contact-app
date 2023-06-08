@@ -1,4 +1,6 @@
 export interface ITask {
-  id: string,
-  text: string
+  id: number,
+  name: string,
+  address: string,
+  mobile: string
 }

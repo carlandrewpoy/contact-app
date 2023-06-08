@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   const [theme, setTheme] = useState<boolean>(false)
   return (
-    <html data-theme={`${ theme ? 'light' : 'coffee'}`} lang="en">
+    <html data-theme={`${ theme ? 'light' : 'dark'}`} lang="en">
       <body className={`${inter.className} p-4`}>
         <button onClick={() => setTheme(!theme)}  className='btn btn-outline'>Theme</button>
         {children}
