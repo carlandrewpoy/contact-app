@@ -1,21 +1,29 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-const MyComponent = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [text, setText] = useState('')
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-      inputRef.current.setSelectionRange(inputRef.current.value.length, inputRef.current.value.length);
-    }
-  }, [text]);
+const MyComponent: React.FC = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   return (
-    <div>
-      <button onClick={() => setText('haha')}>Click</button>
-      <input ref={inputRef} type="text" value="12345" />
+    <div style={{ position: 'relative' }}>
+      {isHovered && (
+        <div style={{ position: 'absolute', top: '-30px' }}>Delete</div>
+      )}
+      <button
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        Edit
+      </button>
     </div>
   );
 };

@@ -7,8 +7,8 @@ import { useState } from 'react'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Todo App',
-  description: 'Todo app',
+  title: 'Contact App',
+  description: 'Contact app',
 }
 
 export default function RootLayout({

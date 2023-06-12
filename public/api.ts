@@ -1,48 +1,49 @@
+import { IContact } from "@/types/contact"
+
 const baseUrl = 'http://127.0.0.1:8000/api'
-import { ITask } from "@/types/tasks"
 
-export const getTodos = async () => {
+export const getContacts = async () => {
 
-  const res = await fetch(`${baseUrl}/employees`, { 
+  const res = await fetch(`${baseUrl}/contacts`, { 
     method: 'GET',
     cache: 'no-store'
    })
-   const todos = await res.json()
-    return todos 
+   const contacts = await res.json()
+    return contacts 
 
 }
 
-export const addTodo = async (todo: ITask): Promise<ITask> => {
+export const addContact = async (contact: IContact): Promise<IContact> => {
   const res = await fetch(`${baseUrl}/save`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(todo)
+    body: JSON.stringify(contact)
   })
-  const newTodo = await res.json()
-  alert('added successfully')
-  return newTodo
+  const newContact = await res.json()
+  alert('Added successfully')
+  return newContact
 }
 
-export const editTodo = async (todo: ITask): Promise<ITask[]> => {
-  const res = await fetch(`${baseUrl}/update/${todo.id}`, {
+export const editContact = async (contact: IContact): Promise<IContact[]> => {
+  const res = await fetch(`${baseUrl}/update/${contact.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(todo)
+    body: JSON.stringify(contact)
   })
-  const newTodo = await res.json()
-  alert('edit successfully')
-  return newTodo
+  const newContact = await res.json()
+  alert('Edit successfully')
+  return newContact
 }
 
-export const deleteTodo = async (todo: ITask) => {
-  await fetch(`${baseUrl}/delete/${todo.id}`, {
+export const deleteContact = async (contact: IContact) => {
+  await fetch(`${baseUrl}/delete/${contact.id}`, {
     method: 'DELETE',headers: {
       'Content-Type': 'application/json'
     }
   })
-  alert('delete successfully')
+  alert('Delete successfully')
 }

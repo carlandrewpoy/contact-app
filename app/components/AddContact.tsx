@@ -1,19 +1,17 @@
 'use client'
 
 import { AiOutlinePlus } from 'react-icons/ai'
-import Modal from './Modal'
-import { FormEventHandler, FormEvent, useState, useEffect, useRef } from 'react'
-import { addTodo } from '@/public/api'
+import { FormEventHandler, useState } from 'react'
+import { addContact, } from '@/public/api'
 import { useRouter } from 'next/navigation'
 import { v4 as uuidv4 } from 'uuid';
-import { useAutoSelectInput, useAutoSelectInputNumber } from '@/public/customHooks'
+import { useAutoSelectInputNumber } from '@/public/customHooks'
+import Modal from './Modal'
 
-const AddTask = () => {
+const AddContact = () => {
   const [openModal, setOpenModal] = useState<boolean>(false)
-  const [newTaskValue, setNewTaskValue] = useState<string>('')
-  const router = useRouter()
-  // const inputRef = useRef<HTMLInputElement>(null);
   const inputRef = useAutoSelectInputNumber(openModal);
+  const router = useRouter()
 
   const [formData, setFormData] = useState({
     name: '',
@@ -27,9 +25,9 @@ const AddTask = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+  const handleSubmitContact: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
-    await addTodo({
+    await addContact({
           id: parseInt(uuidv4()),
           name: formData.name,
           address: formData.address,
@@ -40,36 +38,17 @@ const AddTask = () => {
     setFormData({
       name: '',
       address: '',
-      mobile: '',
+      mobile: '09',
     })
     router.refresh()
-  };
-
-  // useEffect(() => {
-  //   if (inputRef.current) {
-  //     inputRef.current.focus();
-  //     inputRef.current.select();
-  //   }
-  // }, [openModal]);
-
-  // const handleSubmitTodo: FormEventHandler<HTMLFormElement> = async (e) => {
-  //   e.preventDefault()
-  //   console.log(newTaskValue)  
-  //   await addTodo({
-  //     id: uuidv4(),
-  //     text: newTaskValue
-  //   })
-  //   setNewTaskValue('')
-  //   setOpenModal(false)
-  //   router.refresh()
-  // }
+  }
 
   return (
     <div className="w-full">
       <button onClick={() => setOpenModal(true)} className="btn btn-primary w-full">Add New <AiOutlinePlus size={18} /></button>
       <Modal modal={openModal} setModal={setOpenModal}>
-      <form onSubmit={handleSubmit}>
-      <h3 className='font-bold text-lg mb-5'>Add New Task</h3>
+      <form onSubmit={handleSubmitContact}>
+      <h3 className='font-bold text-lg mb-5'>Add New Contact</h3>
       <div className='flex flex-col text-xl gap-4'>
       <div className='flex flex-col gap-2'>
           <label className='text-start' htmlFor='mobile'>
@@ -84,7 +63,8 @@ const AddTask = () => {
             onChange={handleInputChange}
             required
             ref={inputRef}
-            pattern="09[0-9]{9}"            maxLength={11}
+            pattern="09[0-9]{9}"            
+            maxLength={11}
             />
         </div>
         <div className='flex flex-col gap-2'>
@@ -125,4 +105,4 @@ const AddTask = () => {
   )
 }
 
-export default AddTask
+export default AddContact

@@ -1,12 +1,11 @@
-import { ITask } from '@/types/tasks'
-import React from 'react'
-import Task from './Task'
+import { IContact } from '@/types/contact'
+import Contact from './Contact'
 
-interface TodoListProps {
-  todos: ITask[]
+interface ContactListProps {
+  contacts: IContact[]
 }
 
-const TodoList: React.FC<TodoListProps> = ({ todos  }) => {
+const ContactList: React.FC<ContactListProps> = ({ contacts  }) => {
   const context = (
     <div>
       <div className="overflow-x-auto">
@@ -22,7 +21,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos  }) => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {todos.map((todo: any) => <Task key={todo.id} todo={todo} />)}
+            {contacts.map((contact: any) => <Contact key={contact.id} contact={contact} />)}
           </tbody>
         </table>
       </div>
@@ -31,4 +30,4 @@ const TodoList: React.FC<TodoListProps> = ({ todos  }) => {
   return context
 }
 
-export default TodoList
+export default ContactList

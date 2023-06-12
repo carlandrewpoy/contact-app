@@ -1,4 +1,4 @@
-export interface ITask {
+export interface IContact {
   id: number,
   name: string,
   address: string,

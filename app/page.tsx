@@ -1,16 +1,16 @@
-import AddTask from "./components/AddTask";
-import TodoList from "./components/TodoList";
-import { getTodos } from "@/public/api";
+import AddContact from "./components/AddContact";
+import ContactList from "./components/ContactList";
+import { getContacts } from "@/public/api";
 
 export default async function Home() {
-  const todos = await getTodos()
+  const contacts = await getContacts()
   return (
     <main className="max-w-4xl mx-auto mt-4">
       <div className="text-center my-5 flex flex-col gap-4 ">
         <h1 className="text-2xl">Contact List App</h1> 
-        <AddTask />
+        <AddContact />
       </div>
-    <TodoList todos={todos} />
+    <ContactList contacts={contacts} />
     </main>
   )
 }
