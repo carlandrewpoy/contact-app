@@ -1,6 +1,8 @@
 import { IContact } from "@/types/contact"
 
-const baseUrl = 'http://127.0.0.1:8000/api'
+const baseUrl = process.env.API_URL || 'http://127.0.0.1:8000/api';
+
+console.log({baseUrl})
 
 export const getContacts = async () => {
 

@@ -1,8 +1,8 @@
-'use client'
+// 'use client'
 
 import './globals.css'
 import { Inter } from 'next/font/google'
-import { useState } from 'react'
+// import { useState } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,11 +16,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const [theme, setTheme] = useState<boolean>(false)
+  // const [theme, setTheme] = useState<boolean>(false)
   return (
-    <html data-theme={`${ theme ? 'light' : 'dark'}`} lang="en">
+    // <html data-theme={`${ theme ? 'light' : 'dark'}`} lang="en">
+    <html lang="en">
       <body className={`${inter.className} p-4`}>
-        <button onClick={() => setTheme(!theme)}  className='btn btn-outline'>Theme</button>
+        {/* <button onClick={() => setTheme(!theme)}  className='btn btn-outline'>Theme</button> */}
         {children}
       </body>
     </html>
