@@ -1,12 +1,12 @@
 import { IContact } from "@/types/contact"
 
-const baseUrl = process.env.API_URL || 'http://127.0.0.1:8000/api';
+const baseUrl = 'https://laravel-contact-production.up.railway.app/api/contacts';
 
 console.log({baseUrl})
 
 export const getContacts = async () => {
 
-  const res = await fetch(`${baseUrl}/contacts`, { 
+  const res = await fetch(`${baseUrl}`, { 
     method: 'GET',
     cache: 'no-store'
    })
@@ -16,7 +16,7 @@ export const getContacts = async () => {
 }
 
 export const addContact = async (contact: IContact): Promise<IContact> => {
-  const res = await fetch(`${baseUrl}/save`, {
+  const res = await fetch(`${baseUrl}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ export const addContact = async (contact: IContact): Promise<IContact> => {
 }
 
 export const editContact = async (contact: IContact): Promise<IContact[]> => {
-  const res = await fetch(`${baseUrl}/update/${contact.id}`, {
+  const res = await fetch(`${baseUrl}/${contact.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ export const editContact = async (contact: IContact): Promise<IContact[]> => {
 }
 
 export const deleteContact = async (contact: IContact) => {
-  await fetch(`${baseUrl}/delete/${contact.id}`, {
+  await fetch(`${baseUrl}/${contact.id}`, {
     method: 'DELETE',headers: {
       'Content-Type': 'application/json'
     }
